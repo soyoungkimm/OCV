@@ -48,19 +48,24 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.button_Invert = new System.Windows.Forms.Button();
-            this.button_Blue = new System.Windows.Forms.Button();
-            this.button_Green = new System.Windows.Forms.Button();
-            this.button_Red = new System.Windows.Forms.Button();
-            this.button_Grayscale = new System.Windows.Forms.Button();
-            this.button_Half = new System.Windows.Forms.Button();
             this.Image2 = new OpenCvSharp.UserInterface.PictureBoxIpl();
             this.button_Open2 = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.button_Y = new System.Windows.Forms.Button();
-            this.button_HSV = new System.Windows.Forms.Button();
-            this.button_GetColor = new System.Windows.Forms.Button();
-            this.button_Skin = new System.Windows.Forms.Button();
-            this.button_equal = new System.Windows.Forms.Button();
+            this.button_Binary = new System.Windows.Forms.Button();
+            this.button_Noise = new System.Windows.Forms.Button();
+            this.button_Blur = new System.Windows.Forms.Button();
+            this.button_Sharpen = new System.Windows.Forms.Button();
+            this.button_Edge = new System.Windows.Forms.Button();
+            this.button_Histo = new System.Windows.Forms.Button();
+            this.button_Equalization = new System.Windows.Forms.Button();
+            this.button_HFlip = new System.Windows.Forms.Button();
+            this.button_VFlip = new System.Windows.Forms.Button();
+            this.button_Small = new System.Windows.Forms.Button();
+            this.button_Big = new System.Windows.Forms.Button();
+            this.button_Rotate = new System.Windows.Forms.Button();
+            this.button_Crop = new System.Windows.Forms.Button();
+            this.button_Resize = new System.Windows.Forms.Button();
+            this.button_contour = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Image1)).BeginInit();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Image2)).BeginInit();
@@ -238,7 +243,7 @@
             // 
             // button_Invert
             // 
-            this.button_Invert.Location = new System.Drawing.Point(139, 6);
+            this.button_Invert.Location = new System.Drawing.Point(12, 9);
             this.button_Invert.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button_Invert.Name = "button_Invert";
             this.button_Invert.Size = new System.Drawing.Size(56, 28);
@@ -247,75 +252,14 @@
             this.button_Invert.UseVisualStyleBackColor = true;
             this.button_Invert.Click += new System.EventHandler(this.Button_Invert_Click);
             // 
-            // button_Blue
-            // 
-            this.button_Blue.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.button_Blue.ForeColor = System.Drawing.Color.Blue;
-            this.button_Blue.Location = new System.Drawing.Point(111, 6);
-            this.button_Blue.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button_Blue.Name = "button_Blue";
-            this.button_Blue.Size = new System.Drawing.Size(27, 28);
-            this.button_Blue.TabIndex = 35;
-            this.button_Blue.Text = "B";
-            this.button_Blue.UseVisualStyleBackColor = true;
-            this.button_Blue.Click += new System.EventHandler(this.Button_Blue_Click);
-            // 
-            // button_Green
-            // 
-            this.button_Green.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.button_Green.ForeColor = System.Drawing.Color.Green;
-            this.button_Green.Location = new System.Drawing.Point(82, 6);
-            this.button_Green.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button_Green.Name = "button_Green";
-            this.button_Green.Size = new System.Drawing.Size(27, 28);
-            this.button_Green.TabIndex = 34;
-            this.button_Green.Text = "G";
-            this.button_Green.UseVisualStyleBackColor = true;
-            this.button_Green.Click += new System.EventHandler(this.Button_Green_Click);
-            // 
-            // button_Red
-            // 
-            this.button_Red.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.button_Red.ForeColor = System.Drawing.Color.Red;
-            this.button_Red.Location = new System.Drawing.Point(54, 6);
-            this.button_Red.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button_Red.Name = "button_Red";
-            this.button_Red.Size = new System.Drawing.Size(27, 28);
-            this.button_Red.TabIndex = 33;
-            this.button_Red.Text = "R";
-            this.button_Red.UseVisualStyleBackColor = true;
-            this.button_Red.Click += new System.EventHandler(this.Button_Red_Click);
-            // 
-            // button_Grayscale
-            // 
-            this.button_Grayscale.Location = new System.Drawing.Point(197, 6);
-            this.button_Grayscale.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button_Grayscale.Name = "button_Grayscale";
-            this.button_Grayscale.Size = new System.Drawing.Size(85, 28);
-            this.button_Grayscale.TabIndex = 36;
-            this.button_Grayscale.Text = "Grayscale";
-            this.button_Grayscale.UseVisualStyleBackColor = true;
-            this.button_Grayscale.Click += new System.EventHandler(this.Button_Grayscale_Click);
-            // 
-            // button_Half
-            // 
-            this.button_Half.Location = new System.Drawing.Point(7, 6);
-            this.button_Half.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button_Half.Name = "button_Half";
-            this.button_Half.Size = new System.Drawing.Size(46, 28);
-            this.button_Half.TabIndex = 37;
-            this.button_Half.Text = "Half";
-            this.button_Half.UseVisualStyleBackColor = true;
-            this.button_Half.Click += new System.EventHandler(this.button_Half_Click);
-            // 
             // Image2
             // 
             this.Image2.BackColor = System.Drawing.Color.White;
             this.Image2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.Image2.Location = new System.Drawing.Point(487, 90);
+            this.Image2.Location = new System.Drawing.Point(528, 94);
             this.Image2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Image2.Name = "Image2";
-            this.Image2.Size = new System.Drawing.Size(302, 186);
+            this.Image2.Size = new System.Drawing.Size(250, 180);
             this.Image2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.Image2.TabIndex = 66;
             this.Image2.TabStop = false;
@@ -338,78 +282,193 @@
             // 
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             // 
-            // button_Y
+            // button_Binary
             // 
-            this.button_Y.Location = new System.Drawing.Point(285, 6);
-            this.button_Y.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button_Y.Name = "button_Y";
-            this.button_Y.Size = new System.Drawing.Size(72, 28);
-            this.button_Y.TabIndex = 68;
-            this.button_Y.Text = "YCrCb";
-            this.button_Y.UseVisualStyleBackColor = true;
-            this.button_Y.Click += new System.EventHandler(this.button_Y_Click);
+            this.button_Binary.Location = new System.Drawing.Point(74, 9);
+            this.button_Binary.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button_Binary.Name = "button_Binary";
+            this.button_Binary.Size = new System.Drawing.Size(56, 28);
+            this.button_Binary.TabIndex = 68;
+            this.button_Binary.Text = "Binary";
+            this.button_Binary.UseVisualStyleBackColor = true;
+            this.button_Binary.Click += new System.EventHandler(this.button_Binary_Click);
             // 
-            // button_HSV
+            // button_Noise
             // 
-            this.button_HSV.Location = new System.Drawing.Point(362, 6);
-            this.button_HSV.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button_HSV.Name = "button_HSV";
-            this.button_HSV.Size = new System.Drawing.Size(57, 28);
-            this.button_HSV.TabIndex = 69;
-            this.button_HSV.Text = "HSV";
-            this.button_HSV.UseVisualStyleBackColor = true;
-            this.button_HSV.Click += new System.EventHandler(this.button_HSV_Click);
+            this.button_Noise.Location = new System.Drawing.Point(136, 9);
+            this.button_Noise.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button_Noise.Name = "button_Noise";
+            this.button_Noise.Size = new System.Drawing.Size(56, 28);
+            this.button_Noise.TabIndex = 69;
+            this.button_Noise.Text = "Noise";
+            this.button_Noise.UseVisualStyleBackColor = true;
+            this.button_Noise.Click += new System.EventHandler(this.button_Noise_Click);
             // 
-            // button_GetColor
+            // button_Blur
             // 
-            this.button_GetColor.Location = new System.Drawing.Point(425, 6);
-            this.button_GetColor.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button_GetColor.Name = "button_GetColor";
-            this.button_GetColor.Size = new System.Drawing.Size(66, 28);
-            this.button_GetColor.TabIndex = 70;
-            this.button_GetColor.Text = "색 추출";
-            this.button_GetColor.UseVisualStyleBackColor = true;
-            this.button_GetColor.Click += new System.EventHandler(this.button_GetColor_Click);
+            this.button_Blur.Location = new System.Drawing.Point(198, 9);
+            this.button_Blur.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button_Blur.Name = "button_Blur";
+            this.button_Blur.Size = new System.Drawing.Size(56, 28);
+            this.button_Blur.TabIndex = 70;
+            this.button_Blur.Text = "Blur";
+            this.button_Blur.UseVisualStyleBackColor = true;
+            this.button_Blur.Click += new System.EventHandler(this.button_Blur_Click);
             // 
-            // button_Skin
+            // button_Sharpen
             // 
-            this.button_Skin.Location = new System.Drawing.Point(497, 6);
-            this.button_Skin.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button_Skin.Name = "button_Skin";
-            this.button_Skin.Size = new System.Drawing.Size(87, 28);
-            this.button_Skin.TabIndex = 71;
-            this.button_Skin.Text = "피부 추출";
-            this.button_Skin.UseVisualStyleBackColor = true;
-            this.button_Skin.Click += new System.EventHandler(this.button_Skin_Click);
+            this.button_Sharpen.Location = new System.Drawing.Point(260, 9);
+            this.button_Sharpen.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button_Sharpen.Name = "button_Sharpen";
+            this.button_Sharpen.Size = new System.Drawing.Size(73, 28);
+            this.button_Sharpen.TabIndex = 71;
+            this.button_Sharpen.Text = "Sharpen";
+            this.button_Sharpen.UseVisualStyleBackColor = true;
+            this.button_Sharpen.Click += new System.EventHandler(this.button_Sharpen_Click);
             // 
-            // button_equal
+            // button_Edge
             // 
-            this.button_equal.Location = new System.Drawing.Point(7, 42);
-            this.button_equal.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button_equal.Name = "button_equal";
-            this.button_equal.Size = new System.Drawing.Size(102, 28);
-            this.button_equal.TabIndex = 72;
-            this.button_equal.Text = "Equalization";
-            this.button_equal.UseVisualStyleBackColor = true;
-            this.button_equal.Click += new System.EventHandler(this.button_equal_Click);
+            this.button_Edge.Location = new System.Drawing.Point(339, 9);
+            this.button_Edge.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button_Edge.Name = "button_Edge";
+            this.button_Edge.Size = new System.Drawing.Size(56, 28);
+            this.button_Edge.TabIndex = 72;
+            this.button_Edge.Text = "Edge";
+            this.button_Edge.UseVisualStyleBackColor = true;
+            this.button_Edge.Click += new System.EventHandler(this.button_Edge_Click);
+            // 
+            // button_Histo
+            // 
+            this.button_Histo.Location = new System.Drawing.Point(401, 9);
+            this.button_Histo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button_Histo.Name = "button_Histo";
+            this.button_Histo.Size = new System.Drawing.Size(85, 28);
+            this.button_Histo.TabIndex = 73;
+            this.button_Histo.Text = "Histogram";
+            this.button_Histo.UseVisualStyleBackColor = true;
+            this.button_Histo.Click += new System.EventHandler(this.button_Histo_Click);
+            // 
+            // button_Equalization
+            // 
+            this.button_Equalization.Location = new System.Drawing.Point(12, 42);
+            this.button_Equalization.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button_Equalization.Name = "button_Equalization";
+            this.button_Equalization.Size = new System.Drawing.Size(100, 28);
+            this.button_Equalization.TabIndex = 74;
+            this.button_Equalization.Text = "Equalization";
+            this.button_Equalization.UseVisualStyleBackColor = true;
+            this.button_Equalization.Click += new System.EventHandler(this.button_Equalization_Click);
+            // 
+            // button_HFlip
+            // 
+            this.button_HFlip.Location = new System.Drawing.Point(118, 42);
+            this.button_HFlip.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button_HFlip.Name = "button_HFlip";
+            this.button_HFlip.Size = new System.Drawing.Size(55, 28);
+            this.button_HFlip.TabIndex = 75;
+            this.button_HFlip.Text = "HFlip";
+            this.button_HFlip.UseVisualStyleBackColor = true;
+            this.button_HFlip.Click += new System.EventHandler(this.button_HFlip_Click);
+            // 
+            // button_VFlip
+            // 
+            this.button_VFlip.Location = new System.Drawing.Point(179, 42);
+            this.button_VFlip.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button_VFlip.Name = "button_VFlip";
+            this.button_VFlip.Size = new System.Drawing.Size(55, 28);
+            this.button_VFlip.TabIndex = 76;
+            this.button_VFlip.Text = "VFlip";
+            this.button_VFlip.UseVisualStyleBackColor = true;
+            this.button_VFlip.Click += new System.EventHandler(this.button_VFlip_Click);
+            // 
+            // button_Small
+            // 
+            this.button_Small.Location = new System.Drawing.Point(240, 42);
+            this.button_Small.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button_Small.Name = "button_Small";
+            this.button_Small.Size = new System.Drawing.Size(55, 28);
+            this.button_Small.TabIndex = 77;
+            this.button_Small.Text = "Small";
+            this.button_Small.UseVisualStyleBackColor = true;
+            this.button_Small.Click += new System.EventHandler(this.button_Small_Click);
+            // 
+            // button_Big
+            // 
+            this.button_Big.Location = new System.Drawing.Point(300, 42);
+            this.button_Big.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button_Big.Name = "button_Big";
+            this.button_Big.Size = new System.Drawing.Size(55, 28);
+            this.button_Big.TabIndex = 78;
+            this.button_Big.Text = "Big";
+            this.button_Big.UseVisualStyleBackColor = true;
+            this.button_Big.Click += new System.EventHandler(this.button_Big_Click);
+            // 
+            // button_Rotate
+            // 
+            this.button_Rotate.Location = new System.Drawing.Point(361, 42);
+            this.button_Rotate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button_Rotate.Name = "button_Rotate";
+            this.button_Rotate.Size = new System.Drawing.Size(64, 28);
+            this.button_Rotate.TabIndex = 79;
+            this.button_Rotate.Text = "Rotate";
+            this.button_Rotate.UseVisualStyleBackColor = true;
+            this.button_Rotate.Click += new System.EventHandler(this.button_Rotate_Click);
+            // 
+            // button_Crop
+            // 
+            this.button_Crop.Location = new System.Drawing.Point(431, 42);
+            this.button_Crop.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button_Crop.Name = "button_Crop";
+            this.button_Crop.Size = new System.Drawing.Size(55, 28);
+            this.button_Crop.TabIndex = 80;
+            this.button_Crop.Text = "Crop";
+            this.button_Crop.UseVisualStyleBackColor = true;
+            this.button_Crop.Click += new System.EventHandler(this.button_Crop_Click);
+            // 
+            // button_Resize
+            // 
+            this.button_Resize.Location = new System.Drawing.Point(492, 42);
+            this.button_Resize.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button_Resize.Name = "button_Resize";
+            this.button_Resize.Size = new System.Drawing.Size(62, 28);
+            this.button_Resize.TabIndex = 81;
+            this.button_Resize.Text = "Resize";
+            this.button_Resize.UseVisualStyleBackColor = true;
+            this.button_Resize.Click += new System.EventHandler(this.button_Resize_Click);
+            // 
+            // button_contour
+            // 
+            this.button_contour.Location = new System.Drawing.Point(492, 9);
+            this.button_contour.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button_contour.Name = "button_contour";
+            this.button_contour.Size = new System.Drawing.Size(71, 28);
+            this.button_contour.TabIndex = 82;
+            this.button_contour.Text = "contour";
+            this.button_contour.UseVisualStyleBackColor = true;
+            this.button_contour.Click += new System.EventHandler(this.button_contour_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(816, 682);
-            this.Controls.Add(this.button_equal);
-            this.Controls.Add(this.button_Skin);
-            this.Controls.Add(this.button_GetColor);
-            this.Controls.Add(this.button_HSV);
-            this.Controls.Add(this.button_Y);
+            this.Controls.Add(this.button_contour);
+            this.Controls.Add(this.button_Resize);
+            this.Controls.Add(this.button_Crop);
+            this.Controls.Add(this.button_Rotate);
+            this.Controls.Add(this.button_Big);
+            this.Controls.Add(this.button_Small);
+            this.Controls.Add(this.button_VFlip);
+            this.Controls.Add(this.button_HFlip);
+            this.Controls.Add(this.button_Equalization);
+            this.Controls.Add(this.button_Histo);
+            this.Controls.Add(this.button_Edge);
+            this.Controls.Add(this.button_Sharpen);
+            this.Controls.Add(this.button_Blur);
+            this.Controls.Add(this.button_Noise);
+            this.Controls.Add(this.button_Binary);
             this.Controls.Add(this.button_Open2);
             this.Controls.Add(this.Image2);
-            this.Controls.Add(this.button_Half);
-            this.Controls.Add(this.button_Grayscale);
-            this.Controls.Add(this.button_Blue);
-            this.Controls.Add(this.button_Green);
-            this.Controls.Add(this.button_Red);
             this.Controls.Add(this.button_Invert);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.button_Copy);
@@ -450,21 +509,26 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button button_Invert;
-        private System.Windows.Forms.Button button_Blue;
-        private System.Windows.Forms.Button button_Green;
-        private System.Windows.Forms.Button button_Red;
-        private System.Windows.Forms.Button button_Grayscale;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_Name;
-        private System.Windows.Forms.Button button_Half;
         private OpenCvSharp.UserInterface.PictureBoxIpl Image2;
         private System.Windows.Forms.Button button_Open2;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.Windows.Forms.Button button_Y;
-        private System.Windows.Forms.Button button_HSV;
-        private System.Windows.Forms.Button button_GetColor;
-        private System.Windows.Forms.Button button_Skin;
-        private System.Windows.Forms.Button button_equal;
+        private System.Windows.Forms.Button button_Binary;
+        private System.Windows.Forms.Button button_Noise;
+        private System.Windows.Forms.Button button_Blur;
+        private System.Windows.Forms.Button button_Sharpen;
+        private System.Windows.Forms.Button button_Edge;
+        private System.Windows.Forms.Button button_Histo;
+        private System.Windows.Forms.Button button_Equalization;
+        private System.Windows.Forms.Button button_HFlip;
+        private System.Windows.Forms.Button button_VFlip;
+        private System.Windows.Forms.Button button_Small;
+        private System.Windows.Forms.Button button_Big;
+        private System.Windows.Forms.Button button_Rotate;
+        private System.Windows.Forms.Button button_Crop;
+        private System.Windows.Forms.Button button_Resize;
+        private System.Windows.Forms.Button button_contour;
     }
 }
 

@@ -26,6 +26,7 @@ namespace OCV
         Mat two = new Mat();
         Mat dst = new Mat();
         Mat org = new Mat();     // 원본이미지를 담음
+        Mat tmp = new Mat();
 
         public Form1()
         {
@@ -45,6 +46,9 @@ namespace OCV
                 if (Document_Format == "BMP" || Document_Format == "JPG" || Document_Format == "PNG")
                 {
                     src = Cv2.ImRead(openFileDialog1.FileName, ImreadModes.Color);
+
+                    //Cv2.CvtColor(src, src, ColorConversionCodes.BGR2GRAY);
+
                     Image1.ImageIpl = src;
                     org = src;
 
@@ -548,6 +552,545 @@ namespace OCV
             Cv2.DestroyAllWindows();
 
            
+        }
+
+        private void button_Binary_Click(object sender, EventArgs e)
+        {
+            if (Image1.Image != null)
+            {
+                DateTime dt1 = DateTime.Now;    // 시작시간
+                src = Image1.ImageIpl;
+
+                //---------------------------------------------------------------------
+                // 이미지의 평균 계산
+                Scalar mean = Cv2.Mean(src);
+
+                // 평균값을 기준으로 이진화
+                double thresholdValue = mean.Val0; // 평균값을 임계값으로 사용
+                Mat binaryImage = new Mat();
+                Cv2.Threshold(src, binaryImage, thresholdValue, 255, ThresholdTypes.Binary);
+
+                Image1.ImageIpl = binaryImage;
+               
+
+                //---------------------------------------------------------------------
+                
+
+                toolStripStatusLabel_Time.Text = " " +
+                    ((TimeSpan)(DateTime.Now - dt1)).ToString(@"s\.ffff") + " "; // 경과시간 표시
+            }
+            else
+                MessageBox.Show("처리할 그림이 없습니다.", "에러",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+        private void button_Noise_Click(object sender, EventArgs e)
+        {
+            if (Image1.Image != null)
+            {
+                DateTime dt1 = DateTime.Now;    // 시작시간
+                src = Image1.ImageIpl;
+
+                //---------------------------------------------------------------------
+
+                Mat noise = new Mat();
+                noise = new Mat(src.Size(), src.Type(), Scalar.All(0)); // noise 0으로 초기화
+                Cv2.Randn(noise, Scalar.All(0), Scalar.All(20)); // noise 생성
+
+                Mat noisyImage = new Mat();
+                Cv2.AddWeighted(src, 1.0, noise, 1.0, 0.0, noisyImage); // 원본 이미지와 노이즈 이미지를 합침
+
+                Image1.ImageIpl = noisyImage;
+
+                //---------------------------------------------------------------------
+
+
+                toolStripStatusLabel_Time.Text = " " +
+                    ((TimeSpan)(DateTime.Now - dt1)).ToString(@"s\.ffff") + " "; // 경과시간 표시
+            }
+            else
+                MessageBox.Show("처리할 그림이 없습니다.", "에러",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+
+        private void button_Blur_Click(object sender, EventArgs e)
+        {
+            if (Image1.Image != null)
+            {
+                DateTime dt1 = DateTime.Now;    // 시작시간
+                src = Image1.ImageIpl;
+
+                //---------------------------------------------------------------------
+
+                // 가우시안 블러 적용
+                Mat blur_image = new Mat();
+                Cv2.GaussianBlur(src, blur_image, new OpenCvSharp.Size(5, 5), 0); // 커널 크기와 시그마 값 지정
+
+
+                Image1.ImageIpl = blur_image;
+
+                //---------------------------------------------------------------------
+
+
+                toolStripStatusLabel_Time.Text = " " +
+                    ((TimeSpan)(DateTime.Now - dt1)).ToString(@"s\.ffff") + " "; // 경과시간 표시
+            }
+            else
+                MessageBox.Show("처리할 그림이 없습니다.", "에러",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+        private void button_Sharpen_Click(object sender, EventArgs e)
+        {
+            if (Image1.Image != null)
+            {
+                DateTime dt1 = DateTime.Now;    // 시작시간
+                src = Image1.ImageIpl;
+                //---------------------------------------------------------------------
+
+                float[,] mask = new float[3, 3] {{ -1,-1,-1 },
+                                                 { -1, 9,-1 },
+                                                 { -1,-1,-1 }};
+
+
+                Mat kernel = new Mat(3, 3, MatType.CV_32F, mask);
+                Cv2.Filter2D(src, dst, MatType.CV_8U, kernel);
+
+
+                
+
+
+                Image1.ImageIpl = dst;
+
+                //---------------------------------------------------------------------
+
+
+                toolStripStatusLabel_Time.Text = " " +
+                    ((TimeSpan)(DateTime.Now - dt1)).ToString(@"s\.ffff") + " "; // 경과시간 표시
+            }
+            else
+                MessageBox.Show("처리할 그림이 없습니다.", "에러",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+        private void button_Edge_Click(object sender, EventArgs e)
+        {
+            if (Image1.Image != null)
+            {
+                DateTime dt1 = DateTime.Now;    // 시작시간
+                src = Image1.ImageIpl;
+                //---------------------------------------------------------------------
+
+                /*float[,] mask = new float[3, 3] {{ -1,-1,-1 },
+                                                 { -1, 9,-1 },
+                                                 { -1,-1,-1 }};
+
+
+                Mat kernel = new Mat(3, 3, MatType.CV_32F, mask);
+                Cv2.Filter2D(src, dst, MatType.CV_8U, kernel);*/
+                Cv2.Canny(src, dst, 50, 150);
+
+                Image1.ImageIpl = dst;
+
+                //---------------------------------------------------------------------
+
+
+                toolStripStatusLabel_Time.Text = " " +
+                    ((TimeSpan)(DateTime.Now - dt1)).ToString(@"s\.ffff") + " "; // 경과시간 표시
+            }
+            else
+                MessageBox.Show("처리할 그림이 없습니다.", "에러",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+        private void button_Histo_Click(object sender, EventArgs e)
+        {
+            if (Image1.Image != null)
+            {
+
+                DateTime dt1 = DateTime.Now;    // 시작시간
+                src = Image1.ImageIpl;
+
+                Mat[] channels = Cv2.Split(src);
+
+                int histSize = 256; // 히스토그램의 크기
+                Rangef[] ranges = { new Rangef(0, 256) }; // 히스토그램 범위
+
+                Mat hist = new Mat(); // 히스토그램 생성
+                Cv2.CalcHist(channels, new int[] { 0 }, null, hist, 1, new int[] { histSize }, ranges);
+
+                double minVal, maxVal;
+                Cv2.MinMaxLoc(hist, out minVal, out maxVal); // 최소값과 최대값 찾기
+
+                // 스케일링 값 계산
+                float scale = 130.0f / (float)maxVal;
+
+                // 히스토그램 그리기
+                Mat histImage = new Mat(130, 256, MatType.CV_8UC3, Scalar.All(255)); // 히스토그램을 그릴 이미지 생성
+
+                for (int i = 0; i < histSize - 1; i++)
+                {
+                    int binHeight = (int)(hist.At<float>(i) * scale);
+                    Cv2.Line(histImage,
+                             new OpenCvSharp.Point(i, histImage.Height),
+                             new OpenCvSharp.Point(i, histImage.Height - binHeight),
+                             Scalar.Red, 1);
+                }
+
+                Image2.Visible = true;
+                Image2.ImageIpl = histImage;
+
+
+                //---------------------------------------------------------------------
+
+
+                toolStripStatusLabel_Time.Text = " " +
+                    ((TimeSpan)(DateTime.Now - dt1)).ToString(@"s\.ffff") + " "; // 경과시간 표시
+            }
+            else
+                MessageBox.Show("처리할 그림이 없습니다.", "에러",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+        private void button_Equalization_Click(object sender, EventArgs e)
+        {
+            if (Image1.Image != null)
+            {
+                DateTime dt1 = DateTime.Now; // 시작시간
+                src = Image1.ImageIpl;
+
+                Mat[] channels = Cv2.Split(src);
+
+                for (int i = 0; i < channels.Length; i++)
+                {
+                    // 히스토그램 평활화 적용
+                    Cv2.EqualizeHist(channels[i], channels[i]);
+                }
+
+                Mat equalizedImage = new Mat();
+                Cv2.Merge(channels, equalizedImage);
+
+                Image1.ImageIpl = equalizedImage;
+
+                Mat[] equalizedChannels = Cv2.Split(equalizedImage);
+
+                int histSize = 256; // 히스토그램의 크기
+                Rangef[] ranges = { new Rangef(0, 256) }; // 히스토그램 범위
+
+                for (int i = 0; i < equalizedChannels.Length; i++)
+                {
+                    Mat hist = new Mat(); // 히스토그램 생성
+                    Cv2.CalcHist(new Mat[] { equalizedChannels[i] }, new int[] { 0 }, null, hist, 1, new int[] { histSize }, ranges);
+
+                    double minVal, maxVal;
+                    Cv2.MinMaxLoc(hist, out minVal, out maxVal); // 최소값과 최대값 찾기
+
+                    // 스케일링 값 계산
+                    float scale = 130.0f / (float)maxVal;
+
+                    // 히스토그램 그리기
+                    Mat histImage = new Mat(130, 256, MatType.CV_8UC3, Scalar.All(255)); // 히스토그램을 그릴 이미지 생성
+
+                    for (int j = 0; j < histSize - 1; j++)
+                    {
+                        int binHeight = (int)(hist.At<float>(j) * scale);
+                        Cv2.Line(histImage,
+                                 new OpenCvSharp.Point(j, histImage.Height),
+                                 new OpenCvSharp.Point(j, histImage.Height - binHeight),
+                                 Scalar.Red, 1);
+                    }
+
+                    // 각 채널에 해당하는 히스토그램을 이미지로 표시
+                    Image2.Visible = true;
+                    Image2.ImageIpl = histImage;
+                }
+
+                //---------------------------------------------------------------------
+
+                toolStripStatusLabel_Time.Text = " " +
+                    ((TimeSpan)(DateTime.Now - dt1)).ToString(@"s\.ffff") + " "; // 경과시간 표시
+            }
+            else
+                MessageBox.Show("처리할 그림이 없습니다.", "에러",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+        private void button_HFlip_Click(object sender, EventArgs e)
+        {
+            if (Image1.Image != null)
+            {
+                DateTime dt1 = DateTime.Now; // 시작시간
+                src = Image1.ImageIpl;
+
+                //---------------------------------------------------------------------
+
+
+                // 좌우 반전
+                Mat flippedImage = new Mat();
+                Cv2.Flip(src, flippedImage, FlipMode.Y); 
+
+                // 결과 이미지 표시
+                Image1.ImageIpl = flippedImage;
+
+                //---------------------------------------------------------------------
+
+                toolStripStatusLabel_Time.Text = " " +
+                    ((TimeSpan)(DateTime.Now - dt1)).ToString(@"s\.ffff") + " "; // 경과시간 표시
+            }
+            else
+                MessageBox.Show("처리할 그림이 없습니다.", "에러",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+        private void button_VFlip_Click(object sender, EventArgs e)
+        {
+            if (Image1.Image != null)
+            {
+                DateTime dt1 = DateTime.Now; // 시작시간
+                src = Image1.ImageIpl;
+
+                //---------------------------------------------------------------------
+
+
+                // 좌우 반전
+                Mat flippedImage = new Mat();
+                Cv2.Flip(src, flippedImage, FlipMode.X); 
+
+                // 결과 이미지 표시
+                Image1.ImageIpl = flippedImage;
+
+                //---------------------------------------------------------------------
+
+                toolStripStatusLabel_Time.Text = " " +
+                    ((TimeSpan)(DateTime.Now - dt1)).ToString(@"s\.ffff") + " "; // 경과시간 표시
+            }
+            else
+                MessageBox.Show("처리할 그림이 없습니다.", "에러",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+        private void button_Small_Click(object sender, EventArgs e)
+        {
+            if (Image1.Image != null)
+            {
+                DateTime dt1 = DateTime.Now; // 시작시간
+                src = Image1.ImageIpl;
+
+                //---------------------------------------------------------------------
+
+                // 이미지 2배 축소
+                Mat downscaledImage = new Mat();
+                Cv2.PyrDown(src, downscaledImage);
+
+                // Mat을 Bitmap으로 변환
+                Bitmap bitmap = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(downscaledImage);
+
+                // PictureBox에 이미지 표시
+                Image1.Image = bitmap;
+                Image1.SizeMode = PictureBoxSizeMode.Normal; 
+                
+                //---------------------------------------------------------------------
+
+                toolStripStatusLabel_Time.Text = " " +
+                    ((TimeSpan)(DateTime.Now - dt1)).ToString(@"s\.ffff") + " "; // 경과시간 표시
+            }
+            else
+                MessageBox.Show("처리할 그림이 없습니다.", "에러",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+        private void button_Big_Click(object sender, EventArgs e)
+        {
+            if (Image1.Image != null)
+            {
+                DateTime dt1 = DateTime.Now; // 시작시간
+                src = Image1.ImageIpl;
+
+                //---------------------------------------------------------------------
+
+                // 이미지 2배 축소
+                Mat downscaledImage = new Mat();
+                Cv2.PyrUp(src, downscaledImage);
+
+                // Mat을 Bitmap으로 변환
+                Bitmap bitmap = OpenCvSharp.Extensions.BitmapConverter.ToBitmap(downscaledImage);
+
+                // PictureBox에 이미지 표시
+                Image1.Image = bitmap;
+                Image1.SizeMode = PictureBoxSizeMode.Normal;
+               
+
+                //---------------------------------------------------------------------
+
+                toolStripStatusLabel_Time.Text = " " +
+                    ((TimeSpan)(DateTime.Now - dt1)).ToString(@"s\.ffff") + " "; // 경과시간 표시
+            }
+            else
+                MessageBox.Show("처리할 그림이 없습니다.", "에러",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+        private void button_Rotate_Click(object sender, EventArgs e)
+        {
+            if (Image1.Image != null)
+            {
+                DateTime dt1 = DateTime.Now; // 시작시간
+                src = Image1.ImageIpl;
+
+                //---------------------------------------------------------------------
+
+                // 회전할 각도 설정
+                int degree = -45;
+
+                // 이미지 중심을 기준으로 회전하기 위한 변환 행렬 생성
+                Point2f center = new Point2f(src.Width / 2f, src.Height / 2f);
+                Mat matrix = Cv2.GetRotationMatrix2D(center, degree, 1.0);
+
+                // 이미지를 회전
+                Mat rotatedImage = new Mat();
+                Cv2.WarpAffine(src, rotatedImage, matrix, src.Size(), borderMode: BorderTypes.Constant, borderValue: Scalar.White);
+
+                // 화면 표시
+                Image1.ImageIpl = rotatedImage;
+
+                //---------------------------------------------------------------------
+
+                toolStripStatusLabel_Time.Text = " " +
+                    ((TimeSpan)(DateTime.Now - dt1)).ToString(@"s\.ffff") + " "; // 경과시간 표시
+            }
+            else
+                MessageBox.Show("처리할 그림이 없습니다.", "에러",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+        private void button_Crop_Click(object sender, EventArgs e)
+        {
+            if (Image1.Image != null)
+            {
+                DateTime dt1 = DateTime.Now; // 시작시간
+                src = Image1.ImageIpl;
+
+                //---------------------------------------------------------------------
+
+                // 이미지에서 원하는 부분을 선택 (x, y, width, height)
+                Rect regionOfInterest = new Rect(100, 100, 150, 100);
+                Mat extractedRegion = src.SubMat(regionOfInterest);
+
+                // 선택한 부분을 확대
+                Image2.Visible = true;
+                Image2.ImageIpl = extractedRegion;
+
+                //---------------------------------------------------------------------
+
+                toolStripStatusLabel_Time.Text = " " +
+                    ((TimeSpan)(DateTime.Now - dt1)).ToString(@"s\.ffff") + " "; // 경과시간 표시
+            }
+            else
+                MessageBox.Show("처리할 그림이 없습니다.", "에러",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+           
+
+        }
+
+        private void button_Resize_Click(object sender, EventArgs e)
+        {
+            if (Image1.Image != null)
+            {
+                DateTime dt1 = DateTime.Now; // 시작시간
+                src = Image1.ImageIpl;
+
+                //---------------------------------------------------------------------
+
+                 
+
+                /// 이미지 리사이징
+                Cv2.Resize(src, dst, new OpenCvSharp.Size(200, 300));
+
+                // 새 창에 이미지 출력
+                Cv2.NamedWindow("Resize", WindowMode.AutoSize);
+                Cv2.ImShow("Resize", dst);
+                Cv2.WaitKey(0);
+                Cv2.DestroyAllWindows();
+
+                //---------------------------------------------------------------------
+
+                toolStripStatusLabel_Time.Text = " " +
+                    ((TimeSpan)(DateTime.Now - dt1)).ToString(@"s\.ffff") + " "; // 경과시간 표시
+            }
+            else
+                MessageBox.Show("처리할 그림이 없습니다.", "에러",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+        private void button_contour_Click(object sender, EventArgs e)
+        {
+            if (Image1.Image != null)
+            {
+                DateTime dt1 = DateTime.Now; // 시작시간
+                src = Image1.ImageIpl;
+
+                //---------------------------------------------------------------------
+
+                // 이미지 이진화 (임계값 설정) - 이미 grayscale된 이미지라고 가정
+                Mat gray = new Mat();
+                Cv2.CvtColor(src, gray, ColorConversionCodes.BGR2GRAY); // 컬러 이미지를 회색조로 변환
+
+                Mat binary = new Mat();
+                Cv2.Threshold(gray, binary, 127, 255, ThresholdTypes.Binary);
+
+                // 외곽선 찾기
+                OpenCvSharp.Point[][] contours;
+                HierarchyIndex[] hierarchy;
+                Cv2.FindContours(binary, out contours, out hierarchy, RetrievalModes.Tree, ContourApproximationModes.ApproxSimple);
+
+                // 가장 바깥쪽 사각형의 인덱스 찾기
+                int outerRectIndex = GetOuterRectangleIndex(contours, hierarchy);
+
+                // 숫자 6에 대한 외곽선 및 경계 사각형 찾기
+                for (int i = 0; i < contours.Length; i++)
+                {
+                    if (i != outerRectIndex) // 가장 바깥쪽 사각형을 그리지 않음
+                    {
+                        double area = Cv2.ContourArea(contours[i]); // 외곽선의 면적 계산
+                        if (area > 1000) // 너무 작은 외곽선은 무시 (필요한 크기에 따라 조정 가능)
+                        {
+                            Rect boundingRect = OpenCvSharp.Cv2.BoundingRect(contours[i]); // 외곽선을 감싸는 사각형 좌표 계산
+                            Cv2.DrawContours(src, contours, i, Scalar.Green, 2); // 외곽선을 초록색으로 그리기
+                            Cv2.Rectangle(src, boundingRect, Scalar.Red, 2); // 외곽선을 감싸는 사각형을 빨간색으로 그리기
+                        }
+                    }
+                }
+
+
+
+
+                Image1.ImageIpl = src;
+
+                //---------------------------------------------------------------------
+
+                toolStripStatusLabel_Time.Text = " " +
+                    ((TimeSpan)(DateTime.Now - dt1)).ToString(@"s\.ffff") + " "; // 경과시간 표시
+            }
+            else
+                MessageBox.Show("처리할 그림이 없습니다.", "에러",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+
+        // 가장 바깥쪽 사각형의 인덱스를 찾는 함수
+        private int GetOuterRectangleIndex(OpenCvSharp.Point[][] contours, HierarchyIndex[] hierarchy)
+        {
+            int outerRectIndex = -1;
+            for (int i = 0; i < contours.Length; i++)
+            {
+                if (hierarchy[i].Parent < 0) // 부모가 없는 외곽선은 가장 바깥쪽
+                {
+                    outerRectIndex = i;
+                    break;
+                }
+            }
+            return outerRectIndex;
         }
 
     }
