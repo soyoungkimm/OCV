@@ -47,25 +47,19 @@
             this.toolStripStatusLabel8 = new System.Windows.Forms.ToolStripStatusLabel();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.button_Invert = new System.Windows.Forms.Button();
             this.Image2 = new OpenCvSharp.UserInterface.PictureBoxIpl();
             this.button_Open2 = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.button_Binary = new System.Windows.Forms.Button();
-            this.button_Noise = new System.Windows.Forms.Button();
-            this.button_Blur = new System.Windows.Forms.Button();
-            this.button_Sharpen = new System.Windows.Forms.Button();
-            this.button_Edge = new System.Windows.Forms.Button();
-            this.button_Histo = new System.Windows.Forms.Button();
-            this.button_Equalization = new System.Windows.Forms.Button();
-            this.button_HFlip = new System.Windows.Forms.Button();
-            this.button_VFlip = new System.Windows.Forms.Button();
-            this.button_Small = new System.Windows.Forms.Button();
-            this.button_Big = new System.Windows.Forms.Button();
-            this.button_Rotate = new System.Windows.Forms.Button();
-            this.button_Crop = new System.Windows.Forms.Button();
-            this.button_Resize = new System.Windows.Forms.Button();
-            this.button_contour = new System.Windows.Forms.Button();
+            this.button_Blend = new System.Windows.Forms.Button();
+            this.button_Add = new System.Windows.Forms.Button();
+            this.button_Substract = new System.Windows.Forms.Button();
+            this.button_Compose = new System.Windows.Forms.Button();
+            this.button_Compose2 = new System.Windows.Forms.Button();
+            this.button_Match = new System.Windows.Forms.Button();
+            this.button_Contour = new System.Windows.Forms.Button();
+            this.button_RemoveBG = new System.Windows.Forms.Button();
+            this.button_RemoveBG1 = new System.Windows.Forms.Button();
+            this.button_Recognition = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Image1)).BeginInit();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Image2)).BeginInit();
@@ -241,25 +235,14 @@
             this.openFileDialog1.Filter = "이미지|*.bmp;*.jpg;*.png|모든 파일|*.*";
             this.openFileDialog1.Title = "이미지 읽기";
             // 
-            // button_Invert
-            // 
-            this.button_Invert.Location = new System.Drawing.Point(12, 9);
-            this.button_Invert.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button_Invert.Name = "button_Invert";
-            this.button_Invert.Size = new System.Drawing.Size(56, 28);
-            this.button_Invert.TabIndex = 26;
-            this.button_Invert.Text = "Invert";
-            this.button_Invert.UseVisualStyleBackColor = true;
-            this.button_Invert.Click += new System.EventHandler(this.Button_Invert_Click);
-            // 
             // Image2
             // 
             this.Image2.BackColor = System.Drawing.Color.White;
             this.Image2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.Image2.Location = new System.Drawing.Point(528, 94);
+            this.Image2.Location = new System.Drawing.Point(633, 92);
             this.Image2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Image2.Name = "Image2";
-            this.Image2.Size = new System.Drawing.Size(250, 180);
+            this.Image2.Size = new System.Drawing.Size(160, 110);
             this.Image2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.Image2.TabIndex = 66;
             this.Image2.TabStop = false;
@@ -282,194 +265,123 @@
             // 
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             // 
-            // button_Binary
+            // button_Blend
             // 
-            this.button_Binary.Location = new System.Drawing.Point(74, 9);
-            this.button_Binary.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button_Binary.Name = "button_Binary";
-            this.button_Binary.Size = new System.Drawing.Size(56, 28);
-            this.button_Binary.TabIndex = 68;
-            this.button_Binary.Text = "Binary";
-            this.button_Binary.UseVisualStyleBackColor = true;
-            this.button_Binary.Click += new System.EventHandler(this.button_Binary_Click);
+            this.button_Blend.Location = new System.Drawing.Point(12, 9);
+            this.button_Blend.Name = "button_Blend";
+            this.button_Blend.Size = new System.Drawing.Size(58, 30);
+            this.button_Blend.TabIndex = 68;
+            this.button_Blend.Text = "Blend";
+            this.button_Blend.UseVisualStyleBackColor = true;
+            this.button_Blend.Click += new System.EventHandler(this.button_Blend_Click);
             // 
-            // button_Noise
+            // button_Add
             // 
-            this.button_Noise.Location = new System.Drawing.Point(136, 9);
-            this.button_Noise.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button_Noise.Name = "button_Noise";
-            this.button_Noise.Size = new System.Drawing.Size(56, 28);
-            this.button_Noise.TabIndex = 69;
-            this.button_Noise.Text = "Noise";
-            this.button_Noise.UseVisualStyleBackColor = true;
-            this.button_Noise.Click += new System.EventHandler(this.button_Noise_Click);
+            this.button_Add.Location = new System.Drawing.Point(76, 9);
+            this.button_Add.Name = "button_Add";
+            this.button_Add.Size = new System.Drawing.Size(58, 30);
+            this.button_Add.TabIndex = 69;
+            this.button_Add.Text = "Add";
+            this.button_Add.UseVisualStyleBackColor = true;
+            this.button_Add.Click += new System.EventHandler(this.button_Add_Click);
             // 
-            // button_Blur
+            // button_Substract
             // 
-            this.button_Blur.Location = new System.Drawing.Point(198, 9);
-            this.button_Blur.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button_Blur.Name = "button_Blur";
-            this.button_Blur.Size = new System.Drawing.Size(56, 28);
-            this.button_Blur.TabIndex = 70;
-            this.button_Blur.Text = "Blur";
-            this.button_Blur.UseVisualStyleBackColor = true;
-            this.button_Blur.Click += new System.EventHandler(this.button_Blur_Click);
+            this.button_Substract.Location = new System.Drawing.Point(140, 9);
+            this.button_Substract.Name = "button_Substract";
+            this.button_Substract.Size = new System.Drawing.Size(80, 30);
+            this.button_Substract.TabIndex = 70;
+            this.button_Substract.Text = "Substract";
+            this.button_Substract.UseVisualStyleBackColor = true;
+            this.button_Substract.Click += new System.EventHandler(this.button_Substract_Click);
             // 
-            // button_Sharpen
+            // button_Compose
             // 
-            this.button_Sharpen.Location = new System.Drawing.Point(260, 9);
-            this.button_Sharpen.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button_Sharpen.Name = "button_Sharpen";
-            this.button_Sharpen.Size = new System.Drawing.Size(73, 28);
-            this.button_Sharpen.TabIndex = 71;
-            this.button_Sharpen.Text = "Sharpen";
-            this.button_Sharpen.UseVisualStyleBackColor = true;
-            this.button_Sharpen.Click += new System.EventHandler(this.button_Sharpen_Click);
+            this.button_Compose.Location = new System.Drawing.Point(226, 9);
+            this.button_Compose.Name = "button_Compose";
+            this.button_Compose.Size = new System.Drawing.Size(80, 30);
+            this.button_Compose.TabIndex = 71;
+            this.button_Compose.Text = "Compose";
+            this.button_Compose.UseVisualStyleBackColor = true;
+            this.button_Compose.Click += new System.EventHandler(this.button_Compose_Click);
             // 
-            // button_Edge
+            // button_Compose2
             // 
-            this.button_Edge.Location = new System.Drawing.Point(339, 9);
-            this.button_Edge.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button_Edge.Name = "button_Edge";
-            this.button_Edge.Size = new System.Drawing.Size(56, 28);
-            this.button_Edge.TabIndex = 72;
-            this.button_Edge.Text = "Edge";
-            this.button_Edge.UseVisualStyleBackColor = true;
-            this.button_Edge.Click += new System.EventHandler(this.button_Edge_Click);
+            this.button_Compose2.Location = new System.Drawing.Point(312, 9);
+            this.button_Compose2.Name = "button_Compose2";
+            this.button_Compose2.Size = new System.Drawing.Size(87, 30);
+            this.button_Compose2.TabIndex = 72;
+            this.button_Compose2.Text = "Compose2";
+            this.button_Compose2.UseVisualStyleBackColor = true;
+            this.button_Compose2.Click += new System.EventHandler(this.button_Compose2_Click);
             // 
-            // button_Histo
+            // button_Match
             // 
-            this.button_Histo.Location = new System.Drawing.Point(401, 9);
-            this.button_Histo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button_Histo.Name = "button_Histo";
-            this.button_Histo.Size = new System.Drawing.Size(85, 28);
-            this.button_Histo.TabIndex = 73;
-            this.button_Histo.Text = "Histogram";
-            this.button_Histo.UseVisualStyleBackColor = true;
-            this.button_Histo.Click += new System.EventHandler(this.button_Histo_Click);
+            this.button_Match.Location = new System.Drawing.Point(405, 9);
+            this.button_Match.Name = "button_Match";
+            this.button_Match.Size = new System.Drawing.Size(122, 30);
+            this.button_Match.TabIndex = 73;
+            this.button_Match.Text = "Match Template";
+            this.button_Match.UseVisualStyleBackColor = true;
+            this.button_Match.Click += new System.EventHandler(this.button_Match_Click);
             // 
-            // button_Equalization
+            // button_Contour
             // 
-            this.button_Equalization.Location = new System.Drawing.Point(12, 42);
-            this.button_Equalization.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button_Equalization.Name = "button_Equalization";
-            this.button_Equalization.Size = new System.Drawing.Size(100, 28);
-            this.button_Equalization.TabIndex = 74;
-            this.button_Equalization.Text = "Equalization";
-            this.button_Equalization.UseVisualStyleBackColor = true;
-            this.button_Equalization.Click += new System.EventHandler(this.button_Equalization_Click);
+            this.button_Contour.Location = new System.Drawing.Point(12, 43);
+            this.button_Contour.Name = "button_Contour";
+            this.button_Contour.Size = new System.Drawing.Size(70, 30);
+            this.button_Contour.TabIndex = 74;
+            this.button_Contour.Text = "Contour";
+            this.button_Contour.UseVisualStyleBackColor = true;
+            this.button_Contour.Click += new System.EventHandler(this.button_Contour_Click_1);
             // 
-            // button_HFlip
+            // button_RemoveBG
             // 
-            this.button_HFlip.Location = new System.Drawing.Point(118, 42);
-            this.button_HFlip.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button_HFlip.Name = "button_HFlip";
-            this.button_HFlip.Size = new System.Drawing.Size(55, 28);
-            this.button_HFlip.TabIndex = 75;
-            this.button_HFlip.Text = "HFlip";
-            this.button_HFlip.UseVisualStyleBackColor = true;
-            this.button_HFlip.Click += new System.EventHandler(this.button_HFlip_Click);
+            this.button_RemoveBG.Location = new System.Drawing.Point(87, 43);
+            this.button_RemoveBG.Name = "button_RemoveBG";
+            this.button_RemoveBG.Size = new System.Drawing.Size(96, 30);
+            this.button_RemoveBG.TabIndex = 75;
+            this.button_RemoveBG.Text = "RemoveBG";
+            this.button_RemoveBG.UseVisualStyleBackColor = true;
+            this.button_RemoveBG.Click += new System.EventHandler(this.button_RemoveBG_Click);
             // 
-            // button_VFlip
+            // button_RemoveBG1
             // 
-            this.button_VFlip.Location = new System.Drawing.Point(179, 42);
-            this.button_VFlip.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button_VFlip.Name = "button_VFlip";
-            this.button_VFlip.Size = new System.Drawing.Size(55, 28);
-            this.button_VFlip.TabIndex = 76;
-            this.button_VFlip.Text = "VFlip";
-            this.button_VFlip.UseVisualStyleBackColor = true;
-            this.button_VFlip.Click += new System.EventHandler(this.button_VFlip_Click);
+            this.button_RemoveBG1.Location = new System.Drawing.Point(189, 43);
+            this.button_RemoveBG1.Name = "button_RemoveBG1";
+            this.button_RemoveBG1.Size = new System.Drawing.Size(106, 30);
+            this.button_RemoveBG1.TabIndex = 76;
+            this.button_RemoveBG1.Text = "RemoveBG1";
+            this.button_RemoveBG1.UseVisualStyleBackColor = true;
+            this.button_RemoveBG1.Click += new System.EventHandler(this.button_RemoveBG1_Click);
             // 
-            // button_Small
+            // button_Recognition
             // 
-            this.button_Small.Location = new System.Drawing.Point(240, 42);
-            this.button_Small.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button_Small.Name = "button_Small";
-            this.button_Small.Size = new System.Drawing.Size(55, 28);
-            this.button_Small.TabIndex = 77;
-            this.button_Small.Text = "Small";
-            this.button_Small.UseVisualStyleBackColor = true;
-            this.button_Small.Click += new System.EventHandler(this.button_Small_Click);
-            // 
-            // button_Big
-            // 
-            this.button_Big.Location = new System.Drawing.Point(300, 42);
-            this.button_Big.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button_Big.Name = "button_Big";
-            this.button_Big.Size = new System.Drawing.Size(55, 28);
-            this.button_Big.TabIndex = 78;
-            this.button_Big.Text = "Big";
-            this.button_Big.UseVisualStyleBackColor = true;
-            this.button_Big.Click += new System.EventHandler(this.button_Big_Click);
-            // 
-            // button_Rotate
-            // 
-            this.button_Rotate.Location = new System.Drawing.Point(361, 42);
-            this.button_Rotate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button_Rotate.Name = "button_Rotate";
-            this.button_Rotate.Size = new System.Drawing.Size(64, 28);
-            this.button_Rotate.TabIndex = 79;
-            this.button_Rotate.Text = "Rotate";
-            this.button_Rotate.UseVisualStyleBackColor = true;
-            this.button_Rotate.Click += new System.EventHandler(this.button_Rotate_Click);
-            // 
-            // button_Crop
-            // 
-            this.button_Crop.Location = new System.Drawing.Point(431, 42);
-            this.button_Crop.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button_Crop.Name = "button_Crop";
-            this.button_Crop.Size = new System.Drawing.Size(55, 28);
-            this.button_Crop.TabIndex = 80;
-            this.button_Crop.Text = "Crop";
-            this.button_Crop.UseVisualStyleBackColor = true;
-            this.button_Crop.Click += new System.EventHandler(this.button_Crop_Click);
-            // 
-            // button_Resize
-            // 
-            this.button_Resize.Location = new System.Drawing.Point(492, 42);
-            this.button_Resize.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button_Resize.Name = "button_Resize";
-            this.button_Resize.Size = new System.Drawing.Size(62, 28);
-            this.button_Resize.TabIndex = 81;
-            this.button_Resize.Text = "Resize";
-            this.button_Resize.UseVisualStyleBackColor = true;
-            this.button_Resize.Click += new System.EventHandler(this.button_Resize_Click);
-            // 
-            // button_contour
-            // 
-            this.button_contour.Location = new System.Drawing.Point(492, 9);
-            this.button_contour.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button_contour.Name = "button_contour";
-            this.button_contour.Size = new System.Drawing.Size(71, 28);
-            this.button_contour.TabIndex = 82;
-            this.button_contour.Text = "contour";
-            this.button_contour.UseVisualStyleBackColor = true;
-            this.button_contour.Click += new System.EventHandler(this.button_contour_Click);
+            this.button_Recognition.Location = new System.Drawing.Point(301, 43);
+            this.button_Recognition.Name = "button_Recognition";
+            this.button_Recognition.Size = new System.Drawing.Size(106, 30);
+            this.button_Recognition.TabIndex = 77;
+            this.button_Recognition.Text = "Recognition";
+            this.button_Recognition.UseVisualStyleBackColor = true;
+            this.button_Recognition.Click += new System.EventHandler(this.button_Recognition_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(816, 682);
-            this.Controls.Add(this.button_contour);
-            this.Controls.Add(this.button_Resize);
-            this.Controls.Add(this.button_Crop);
-            this.Controls.Add(this.button_Rotate);
-            this.Controls.Add(this.button_Big);
-            this.Controls.Add(this.button_Small);
-            this.Controls.Add(this.button_VFlip);
-            this.Controls.Add(this.button_HFlip);
-            this.Controls.Add(this.button_Equalization);
-            this.Controls.Add(this.button_Histo);
-            this.Controls.Add(this.button_Edge);
-            this.Controls.Add(this.button_Sharpen);
-            this.Controls.Add(this.button_Blur);
-            this.Controls.Add(this.button_Noise);
-            this.Controls.Add(this.button_Binary);
+            this.Controls.Add(this.button_Recognition);
+            this.Controls.Add(this.button_RemoveBG1);
+            this.Controls.Add(this.button_RemoveBG);
+            this.Controls.Add(this.button_Contour);
+            this.Controls.Add(this.button_Match);
+            this.Controls.Add(this.button_Compose2);
+            this.Controls.Add(this.button_Compose);
+            this.Controls.Add(this.button_Substract);
+            this.Controls.Add(this.button_Add);
+            this.Controls.Add(this.button_Blend);
             this.Controls.Add(this.button_Open2);
             this.Controls.Add(this.Image2);
-            this.Controls.Add(this.button_Invert);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.button_Copy);
             this.Controls.Add(this.button_Save);
@@ -508,27 +420,21 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel8;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.Button button_Invert;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_Name;
         private OpenCvSharp.UserInterface.PictureBoxIpl Image2;
         private System.Windows.Forms.Button button_Open2;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.Windows.Forms.Button button_Binary;
-        private System.Windows.Forms.Button button_Noise;
-        private System.Windows.Forms.Button button_Blur;
-        private System.Windows.Forms.Button button_Sharpen;
-        private System.Windows.Forms.Button button_Edge;
-        private System.Windows.Forms.Button button_Histo;
-        private System.Windows.Forms.Button button_Equalization;
-        private System.Windows.Forms.Button button_HFlip;
-        private System.Windows.Forms.Button button_VFlip;
-        private System.Windows.Forms.Button button_Small;
-        private System.Windows.Forms.Button button_Big;
-        private System.Windows.Forms.Button button_Rotate;
-        private System.Windows.Forms.Button button_Crop;
-        private System.Windows.Forms.Button button_Resize;
-        private System.Windows.Forms.Button button_contour;
+        private System.Windows.Forms.Button button_Blend;
+        private System.Windows.Forms.Button button_Add;
+        private System.Windows.Forms.Button button_Substract;
+        private System.Windows.Forms.Button button_Compose;
+        private System.Windows.Forms.Button button_Compose2;
+        private System.Windows.Forms.Button button_Match;
+        private System.Windows.Forms.Button button_Contour;
+        private System.Windows.Forms.Button button_RemoveBG;
+        private System.Windows.Forms.Button button_RemoveBG1;
+        private System.Windows.Forms.Button button_Recognition;
     }
 }
 
